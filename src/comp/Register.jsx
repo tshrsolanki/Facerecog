@@ -11,7 +11,7 @@ export const Register = (props) => {
     if (!name || !email || !pass) {
       alert("please fill up all the fields");
     } else {
-      fetch("http://localhost:5000/register", {
+      fetch("https://mysterious-headland-13441.herokuapp.com/register", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

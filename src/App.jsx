@@ -18,7 +18,6 @@ function App() {
     setBox(b);
   };
   const calculateFl = (res) => {
-    console.log(res);
     const clarfaiim = res.outputs[0].data.regions[0].region_info.bounding_box;
 
     const ima = document.getElementById("input");
@@ -34,7 +33,7 @@ function App() {
   };
   const sub = (e) => {
     setUrl(e);
-    fetch("http://localhost:5000/imageurl", {
+    fetch("https://mysterious-headland-13441.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -50,7 +49,7 @@ function App() {
         }
       })
       .then((res) => {
-        fetch("http://localhost:5000/image", {
+        fetch("https://mysterious-headland-13441.herokuapp.com/image", {
           method: "put",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
