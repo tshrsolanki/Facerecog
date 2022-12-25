@@ -1,0 +1,7 @@
+export const actions = {
+  SET_USER: "SET_USER",
+  SET_URL: "SET_URL",
+  SET_IS_PROFILE_OPEN: "SET_IS_PROFILE_OPEN",
+  SET_BOX: "SET_BOX",
+  SET_MESSAGE: "SET_MESSAGE",
+};

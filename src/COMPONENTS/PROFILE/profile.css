@@ -1,0 +1,21 @@
+.profile-modal {
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.closeProfile {
+  height: 27px;
+  width: 27px;
+  border-radius: 7px;
+  border: none;
+  background-color: rgb(157, 170, 170);
+}
+.closeProfile:hover {
+  background-color: rgb(202, 56, 12);
+}

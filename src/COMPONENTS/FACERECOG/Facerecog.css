@@ -1,0 +1,40 @@
+.bb {
+  position: absolute;
+  box-shadow: 0 0 0 3px #149df2;
+  animation: load 2s linear 1;
+}
+.message {
+  animation: textColor 1s linear 1;
+}
+@keyframes textColor {
+  0% {
+    color: black;
+  }
+  25% {
+    color: red;
+  }
+  50% {
+    color: black;
+  }
+  75% {
+    color: red;
+  }
+  50% {
+    color: black;
+  }
+}
+
+@keyframes load {
+  0% {
+    box-shadow: 0 0 0 0.2px #149df2;
+  }
+  25% {
+    box-shadow: 0 0 0 1px #149df2;
+  }
+  60% {
+    box-shadow: 0 0 0 2px #149df2;
+  }
+  100% {
+    box-shadow: 0 0 0 3px #149df2;
+  }
+}
