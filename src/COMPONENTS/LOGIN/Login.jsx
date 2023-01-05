@@ -26,36 +26,49 @@ export const Login = () => {
     } else {
       try {
         toast.dismiss();
-        const res = await toast.promise(
-          fetch("http://localhost:5000/signin", {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: mail,
-              password: pass,
-            }),
+        const loggingToast = toast.loading("logging in", {
+          position: "bottom-center",
+          theme: "colored",
+        });
+
+        const res = await fetch("http://localhost:5000/signin", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: mail,
+            password: pass,
           }),
-          {
-            pending: "logging in",
-            success: "logged in",
-            error: "something went wrong",
-          },
-          {
-            position: "bottom-center",
-            theme: "colored",
-            autoClose: 1000,
-            hideProgressBar: true,
-          }
-        );
+        });
 
         const user = await res.json();
         if (user.id) {
+          toast.update(loggingToast, {
+            render: "successfully logged in",
+            type: "success",
+            isLoading: false,
+            autoClose: 1500,
+            hideProgressBar: true,
+          });
           saveAuthTokenInSession(user.token);
           navigate("/");
           dispatch(setuser(user));
+          return;
         }
+        toast.update(loggingToast, {
+          render: user.message,
+          type: "warning",
+          isLoading: false,
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
       } catch (error) {
-        console.log(error);
+        toast.dismiss();
+        toast.error("Something went wrong", {
+          hideProgressBar: true,
+          autoClose: 2000,
+          position: "bottom-center",
+          theme: "colored",
+        });
       }
     }
   };

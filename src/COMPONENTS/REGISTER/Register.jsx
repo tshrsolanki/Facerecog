@@ -8,7 +8,6 @@ export const Register = () => {
   const [email, setemail] = useState("");
   const [pass, setpass] = useState("");
   const [name, setname] = useState("");
-  const [mess, setmess] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const submit = async (e) => {
@@ -24,40 +23,50 @@ export const Register = () => {
     } else {
       try {
         toast.dismiss();
-        const res = await toast.promise(
-          fetch("http://localhost:5000/register", {
-            method: "post",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: email,
-              password: pass,
-              name: name,
-            }),
+        const registeringToast = toast.loading("Registering", {
+          position: "bottom-center",
+          theme: "colored",
+        });
+        const res = await fetch("http://localhost:5000/register", {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: email,
+            password: pass,
+            name: name,
           }),
-          {
-            pending: "signing in",
-            success: "signed in",
-            error: "something went wrong",
-          },
-          {
-            position: "bottom-center",
-            theme: "colored",
-            autoClose: 1000,
-            hideProgressBar: true,
-          }
-        );
+        });
 
         const user = await res.json();
 
         if (user.id) {
+          toast.update(registeringToast, {
+            render: "Registered succesfully",
+            type: "success",
+            isLoading: false,
+            autoClose: 1500,
+            hideProgressBar: true,
+          });
           window.localStorage.setItem("token", user.token);
-          setmess("");
           dispatch(setuser(user));
           navigate("/");
           return;
         }
-        setmess("Email already exists");
+        toast.update(registeringToast, {
+          render: user.message,
+          type: "warning",
+          isLoading: false,
+          autoClose: 1500,
+          hideProgressBar: true,
+        });
       } catch (error) {
+        toast.dismiss();
+        toast.error("Something went wrong", {
+          hideProgressBar: true,
+          autoClose: 2000,
+          position: "bottom-center",
+          theme: "colored",
+        });
         console.log(error);
       }
     }
@@ -105,9 +114,7 @@ export const Register = () => {
               />
             </div>
           </fieldset>
-          <div className="tc">
-            <h6>{mess}</h6>
-          </div>
+
           <div className="tc">
             <input
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"

@@ -29,6 +29,7 @@ export const Profile = (props) => {
       );
 
       const data = await res.json();
+      console.log(data.message);
       setTimeout(() => {
         dispatch(setuser(data));
         dispatch(setProfileOpen(false));
