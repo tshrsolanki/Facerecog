@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { url } from "../Path";
 import { actions } from "../UTILS/constant";
 export const setuser = (user) => {
   return {
@@ -42,7 +43,7 @@ export const fetchImageRecogData = (link, id) => {
         position: "top-center",
         theme: "colored",
       });
-      const resp = await fetch("http://localhost:5000/imageurl", {
+      const resp = await fetch(`${url}/imageurl`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setuser } from "../../ACTIONS/actions";
+import { url } from "../../Path";
 
 export const Register = () => {
   const [email, setemail] = useState("");
@@ -27,7 +28,7 @@ export const Register = () => {
           position: "bottom-center",
           theme: "colored",
         });
-        const res = await fetch("http://localhost:5000/register", {
+        const res = await fetch(`${url}/register`, {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

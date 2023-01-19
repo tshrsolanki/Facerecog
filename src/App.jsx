@@ -9,6 +9,7 @@ import { Profile } from "./COMPONENTS/PROFILE/Profile";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setuser } from "./ACTIONS/actions";
+import { url } from "./Path";
 
 function App() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function App() {
       const token = window.localStorage.getItem("token");
       if (token) {
         try {
-          const res = await fetch("http://localhost:5000/signin", {
+          const res = await fetch(`${url}/signin`, {
             method: "post",
             headers: {
               "Content-Type": "application/json",

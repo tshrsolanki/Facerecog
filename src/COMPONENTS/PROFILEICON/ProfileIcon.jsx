@@ -13,6 +13,7 @@ import {
   setUrl,
   setuser,
 } from "../../ACTIONS/actions";
+import { url } from "../../Path";
 
 export const ProfileIcon = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -23,7 +24,7 @@ export const ProfileIcon = () => {
   };
   const signout = () => {
     const token = window.localStorage.getItem("token");
-    fetch("http://localhost:5000/signout", {
+    fetch(`${url}/signout`, {
       method: "post",
       headers: { "Content-Type": "application/json", authorization: token },
     })

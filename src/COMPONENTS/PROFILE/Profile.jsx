@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { setProfileOpen, setuser } from "../../ACTIONS/actions";
+import { url } from "../../Path";
 import "./profile.css";
 export const Profile = (props) => {
   const userData = useSelector((state) => state.userData);
@@ -10,7 +11,7 @@ export const Profile = (props) => {
   const update = async () => {
     if (name) {
       const res = await toast.promise(
-        fetch(`http://localhost:5000/profile/${userData.id}`, {
+        fetch(`${url}/profile/${userData.id}`, {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name }),
@@ -29,7 +30,6 @@ export const Profile = (props) => {
       );
 
       const data = await res.json();
-      console.log(data.message);
       setTimeout(() => {
         dispatch(setuser(data));
         dispatch(setProfileOpen(false));

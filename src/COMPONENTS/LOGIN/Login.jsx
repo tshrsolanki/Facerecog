@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setuser } from "../../ACTIONS/actions";
+import { url } from "../../Path";
 
 export const Login = () => {
   const [mail, setmail] = useState("");
@@ -31,7 +32,7 @@ export const Login = () => {
           theme: "colored",
         });
 
-        const res = await fetch("http://localhost:5000/signin", {
+        const res = await fetch(`${url}}/signin`, {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
